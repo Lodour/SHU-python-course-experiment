@@ -140,9 +140,9 @@ def Tree(t, size, rate, angle, minsize):
         return
     # 避免出界
     pu(t)
-    fd(t, size)
+    fd(t, size * 2)
     rt(t, 90)
-    fd(t, size)
+    fd(t, size * 2)
     lt(t, 90)
     pd(t)
 
@@ -174,10 +174,11 @@ if __name__ == '__main__':
     bob = Turtle()
     bob.delay = 0.001
 
-    Heart(bob, 50)
-    # Snow(bob, 100, 4)
+    # Heart(bob, 50)
+    # Snow(bob, 200, 4)
     # Tree(bob, 100, 2, 60, 5)
     # Tree(bob, 100, 1.7, 30, 5)
+    Tree(bob, 100, 1.4, 45, 4)
 
     # DIRECTION = 0   # global var
     # Hilbert(bob, 3)
