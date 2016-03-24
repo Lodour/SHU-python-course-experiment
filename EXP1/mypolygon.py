@@ -1,6 +1,8 @@
 # coding=utf-8
 from swampy.TurtleWorld import *
 from polygon import arc
+from math import *
+
 
 def Heart(t, r):
     """
@@ -27,7 +29,7 @@ def Heart(t, r):
 
 
 def Fractal(t, size, minsize):
-    """
+    """ Koch
     t       : Turtle
     size    : Length of the longest edge
     rate    : LengthOfThisEdge / LengthOfNextEdge
@@ -46,11 +48,12 @@ def Fractal(t, size, minsize):
     Fractal(t, newsize, minsize)
 
 
-def Fractal2(t, size, rate, minsize):
-    """
+def Fractal2(t, size, rate, angle, minsize):
+    """ BinaryTree
     t       : Turtle
     size    : Length of the longest edge
     rate    : LengthOfThisEdge / LengthOfNextEdge
+    angle   : Angle of each turn.
     minsize : Length of the shortest edge
     """
     fd(t, size)
@@ -59,29 +62,62 @@ def Fractal2(t, size, rate, minsize):
     newsize = size / rate
 
     # 左边
-    lt(t, 60)
-    Fractal2(t, newsize, rate, minsize)
+    lt(t, angle)
+    Fractal2(t, newsize, rate, angle, minsize)
 
     # 左边还原
     pu(t)
     lt(t, 180)
     fd(t, newsize)
-    lt(t, 60)
+    lt(t, 180 - angle * 2)
     pd(t)
 
     # 右边
-    Fractal2(t, newsize, rate, minsize)
+    Fractal2(t, newsize, rate, angle, minsize)
 
     # 右边还原
     pu(t)
     lt(t, 180)
     fd(t, newsize)
-    rt(t, 120)
+    rt(t, 180 - angle)
     pd(t)
 
 
-def Snow(t, size, minsize):
+# 0/1/2/3 right/down/left/up
+def Fractal3_draw(t, nextdir, length):
+    """ Draw a line towards #nextdir.
+    length : Length of the line.
     """
+    # if not DIRECTION == nextdir:
+    rt(t, (nextdir - DIRECTION + 4) % 4 * 90)
+    fd(t, length)
+    return nextdir
+
+
+def Fractal3(t, level, _dir, length):
+    """ Hilbert
+    t      : Turtle
+    level  : level of the Hilbert Curve
+    _dir   : Direction of next recursion.
+    length : Length of each edge.
+    """
+    global DIRECTION
+    if level == 1:
+        newdir = [_dir ^ i for i in (2, 3, 0)]
+        for i in range(3):
+            DIRECTION = Fractal3_draw(t, newdir[i], length)
+    else:
+        newdir1 = [_dir ^ i for i in (1, 0, 0, 3)]
+        newdir2 = [_dir ^ i for i in (2, 3, 0)]
+        for i in range(3):
+            Fractal3(t, level - 1, newdir1[i], length)
+            DIRECTION = Fractal3_draw(t, newdir2[i], length)
+        Fractal3(t, level - 1, newdir1[3], length)
+
+
+def Snow(t, size, minsize):
+    """ Snow Flake
+
     t       : Turtle
     size    : Length of the longest edge
     minsize : Length of the shortest edge
@@ -91,15 +127,16 @@ def Snow(t, size, minsize):
         rt(t, 120)
 
 
-def Tree(t, size, rate, minsize):
+def Tree(t, size, rate, angle, minsize):
     """
     t       : Turtle
     size    : Length of the longest edge
     rate    : LengthOfThisEdge / LengthOfNextEdge
+    angle   : Angle of each turn.
     minsize : Length of the shortest edge
     """
     if rate < 1.0:
-        print 'rate must be greater than 1.0'
+        print '[WARNING] Rate must be greater than 1.0'
         return
     # 避免出界
     pu(t)
@@ -111,7 +148,7 @@ def Tree(t, size, rate, minsize):
 
     # 向上
     lt(t)
-    Fractal2(t, size, rate, minsize)
+    Fractal2(t, size, rate, angle, minsize)
 
     # 还原
     pu(t)
@@ -121,13 +158,28 @@ def Tree(t, size, rate, minsize):
     pd(t)
 
 
+def Hilbert(t, level, length=10):
+    """ Hilbert
+    t      : Turtle
+    level  : level of the Hilbert Curve
+    length : Length of each edge.
+    """
+    lt(t)
+    globals()['DIRECTION'] = 3
+    Fractal3(t, 5, DIRECTION, length)
+
+
 if __name__ == '__main__':
     world = TurtleWorld()
     bob = Turtle()
     bob.delay = 0.001
 
-    Heart(bob, 20)
+    Heart(bob, 50)
     # Snow(bob, 100, 4)
-    # Tree(bob, 200, 1.8, 2)
+    # Tree(bob, 100, 2, 60, 5)
+    # Tree(bob, 100, 1.7, 30, 5)
+
+    # DIRECTION = 0   # global var
+    # Hilbert(bob, 3)
 
     wait_for_user()
