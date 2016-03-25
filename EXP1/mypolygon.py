@@ -95,9 +95,9 @@ def Fractal3_draw(t, nextdir, length):
 
 
 def Fractal3(t, level, _dir, length):
-    """ Hilbert
+    """ Peano
     t      : Turtle
-    level  : level of the Hilbert Curve
+    level  : level of the Peano Curve
     _dir   : Direction of next recursion.
     length : Length of each edge.
     """
@@ -158,10 +158,10 @@ def Tree(t, size, rate, angle, minsize):
     pd(t)
 
 
-def Hilbert(t, level, length=10):
-    """ Hilbert
+def Peano(t, level, length=10):
+    """ Peano
     t      : Turtle
-    level  : level of the Hilbert Curve
+    level  : level of the Peano Curve
     length : Length of each edge.
     """
     lt(t)
@@ -178,9 +178,9 @@ if __name__ == '__main__':
     # Snow(bob, 200, 4)
     # Tree(bob, 100, 2, 60, 5)
     # Tree(bob, 100, 1.7, 30, 5)
-    Tree(bob, 100, 1.4, 45, 4)
+    # Tree(bob, 100, 1.4, 45, 4)
 
     # DIRECTION = 0   # global var
-    # Hilbert(bob, 3)
+    # Peano(bob, 3)
 
     wait_for_user()
