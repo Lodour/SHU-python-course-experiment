@@ -88,8 +88,7 @@ def Fractal3_draw(t, nextdir, length):
     """ Draw a line towards #nextdir.
     length : Length of the line.
     """
-    # if not DIRECTION == nextdir:
-    rt(t, (nextdir - DIRECTION + 4) % 4 * 90)
+    rt(t, (nextdir - PEANO_DIRECTION + 4) % 4 * 90)
     fd(t, length)
     return nextdir
 
@@ -98,20 +97,20 @@ def Fractal3(t, level, _dir, length):
     """ Peano
     t      : Turtle
     level  : level of the Peano Curve
-    _dir   : Direction of next recursion.
+    _dir   : PEANO_Direction of next recursion.
     length : Length of each edge.
     """
-    global DIRECTION
+    global PEANO_DIRECTION
     if level == 1:
         newdir = [_dir ^ i for i in (2, 3, 0)]
         for i in range(3):
-            DIRECTION = Fractal3_draw(t, newdir[i], length)
+            PEANO_DIRECTION = Fractal3_draw(t, newdir[i], length)
     else:
         newdir1 = [_dir ^ i for i in (1, 0, 0, 3)]
         newdir2 = [_dir ^ i for i in (2, 3, 0)]
         for i in range(3):
             Fractal3(t, level - 1, newdir1[i], length)
-            DIRECTION = Fractal3_draw(t, newdir2[i], length)
+            PEANO_DIRECTION = Fractal3_draw(t, newdir2[i], length)
         Fractal3(t, level - 1, newdir1[3], length)
 
 
@@ -165,8 +164,8 @@ def Peano(t, level, length=10):
     length : Length of each edge.
     """
     lt(t)
-    globals()['DIRECTION'] = 3
-    Fractal3(t, 5, DIRECTION, length)
+    globals()['PEANO_DIRECTION'] = 3
+    Fractal3(t, 5, PEANO_DIRECTION, length)
 
 
 if __name__ == '__main__':
@@ -175,12 +174,16 @@ if __name__ == '__main__':
     bob.delay = 0.001
 
     # Heart(bob, 50)
+
     # Snow(bob, 200, 4)
+
     # Tree(bob, 100, 2, 60, 5)
+
     # Tree(bob, 100, 1.7, 30, 5)
+
     # Tree(bob, 100, 1.4, 45, 4)
 
-    # DIRECTION = 0   # global var
-    # Peano(bob, 3)
+    PEANO_DIRECTION = 0   # global var
+    Peano(bob, 3)
 
     wait_for_user()
