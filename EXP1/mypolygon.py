@@ -173,7 +173,7 @@ if __name__ == '__main__':
     bob = Turtle()
     bob.delay = 0.001
 
-    # Heart(bob, 50)
+    Heart(bob, 50)
 
     # Snow(bob, 200, 4)
 
@@ -183,7 +183,7 @@ if __name__ == '__main__':
 
     # Tree(bob, 100, 1.4, 45, 4)
 
-    PEANO_DIRECTION = 0   # global var
-    Peano(bob, 3)
+    # PEANO_DIRECTION = 0   # global var
+    # Peano(bob, 3)
 
     wait_for_user()
