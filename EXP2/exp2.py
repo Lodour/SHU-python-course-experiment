@@ -140,6 +140,6 @@ def EXP2_5():
 
 
 if __name__ == '__main__':
-    # EXP2_3_1()
-    EXP2_4()
+    EXP2_3_1()
+    # EXP2_4()
     # EXP2_5()
