@@ -50,6 +50,8 @@ def OutputAllAbecedarianWords(li):
 
 if __name__ == '__main__':
 
+    print rotateWord('abcdef', 3)
+
     li = []
     with open('words.txt', 'r') as fin:
         li += [line.strip() for line in fin]

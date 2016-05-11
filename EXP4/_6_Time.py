@@ -6,7 +6,7 @@ class Time():
 
     # 构造函数 默认为00:00:00
     def __init__(self, hour=0, minute=0, second=0):
-        self.hour = hour
+        self.hour   = hour
         self.minute = minute
         self.second = second
 
@@ -22,7 +22,7 @@ class Time():
 
     # 时间转换为秒数
     def time2int(self):
-        t1 = self.hour * 3600
+        t1 = self.hour   * 3600
         t2 = self.minute * 60
         t3 = self.second * 1
         return t1 + t2 + t3
@@ -41,9 +41,9 @@ class Time():
 
     # 判断合法
     def isvalid(self):
-        return self.hour in range(0, 25) \
-            and self.minute in range(0, 61) \
-            and self.second in range(0, 61)
+        return self.hour   in range(0, 25) \
+           and self.minute in range(0, 61) \
+           and self.second in range(0, 61)
 
 
 if __name__ == '__main__':
