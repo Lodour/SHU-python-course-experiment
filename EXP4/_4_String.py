@@ -1,34 +1,33 @@
 # coding=utf-8
 
 
-# 4(1)
+# 返回strsrc轮转n个字符后得到的字符串
 def rotateWord(strsrc, n):
     L = len(strsrc)
     return ''.join([strsrc[(i + n) % L] for i in range(L)])
 
 
-# 4(2)
+# 判断word是否含有regex中的禁止字母
 def avoids(word, regex):
     return [i for i in word if i in regex] != []
 
 
-# 4(3)
+# 判断word是否仅由regex中字母组成
 def useonly(word, regex):
     return [i for i in word if not i in regex] == []
 
 
-# 4(4)
+# 判断word是否包含了regex中所有字母至少一个
 def useall(word, regex):
     return len([i for i in regex if i in word]) == len(regex)
 
 
-# 4(5)
-# 返回word中是否没有字母e
+# 判断word中是否没有字母e
 def hasnoe(word):
     return not 'e' in word
 
 
-# 4(6)
+# 判断一个英语单词中的字母是否符合字母表序
 def isabecedarian(word):
     return word == ''.join(sorted(word))
 

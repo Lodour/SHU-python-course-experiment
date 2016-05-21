@@ -62,13 +62,13 @@ if __name__ == '__main__':
 
     # 读入文本数据
     txt, vis = [], []
-    dx = (-1, -1, -1, 0, 0, 1, 1, 1)
-    dy = (-1, 0, 1, -1, 1, -1, 0, 1)
     with open('_7_XJT.txt', 'r') as fin:
         txt += [line.strip() for line in fin]
         for i in range(len(txt)):
             vis += [[0] * len(txt)]
 
+    dx = (-1, -1, -1, 0, 0, 1, 1, 1)
+    dy = (-1, 0, 1, -1, 1, -1, 0, 1)
     foo1()
 
     for i in range(20):
@@ -88,5 +88,5 @@ if __name__ == '__main__':
             print res[:-1]
             print
 
-        # raw_input()
+        raw_input()
         out(randint(0, 100000))
