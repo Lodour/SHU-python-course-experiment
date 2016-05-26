@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+# 有效匹配模式为“数字、词(”
 def getSingleWords(file):
     res = []
     for line in file:
@@ -15,7 +16,8 @@ def getSingleWords(file):
             res.append(find[0].replace(' ', ''))
     return res
 
-
+# 识别模式为"第?回"
+# 由于后面章节会引用"第?回"，因此每一回只记录第一次
 def getChineseText(file):
     res, cur, vis = [], u'', set()
     for line in file:
